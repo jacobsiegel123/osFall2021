@@ -6,7 +6,6 @@ public class ClientGenerator {
 
     public static void main(String[] args) {
         Thread[] threads = new Thread[MAX_CLIENTS];
-        System.out.println("Created client array");
         for (int i = 0; i < threads.length; i++) {
             threads[i] = createClient(i);
             threads[i].start();
