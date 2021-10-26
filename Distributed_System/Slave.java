@@ -3,19 +3,15 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
 
-public class Slave extends Thread {
-    public static final int JOB_TIME = 10_000;
+public abstract class Slave extends Thread {
+    protected final List<Job> waitingJobs = new LinkedList<>();
+    protected final int port;
+    protected ObjectInputStream in;
+    protected ObjectOutputStream out;
+    protected Socket client;
 
-    private final List<Job> waitingJobs = new LinkedList<>();
-    private final int port;
-    private final JobType specialty;
-    private ObjectInputStream in;
-    private ObjectOutputStream out;
-    private Socket client;
-
-    public Slave(int port, JobType type){
+    public Slave(int port){
         this.port = port;
-        this.specialty = type;
     }
 
     @Override
@@ -34,7 +30,7 @@ public class Slave extends Thread {
                 doJob(current);
 
                 //Inform the master that we just finished a job
-                out.writeObject(current);
+                out.writeObject(current.getId());
             }
             disconnect();
         }
@@ -49,7 +45,7 @@ public class Slave extends Thread {
      * This method connects to the master and sets up the input and output streams
      * that will be used to communicate with it.
      */
-    private void connect(){
+    protected void connect(){
         try(ServerSocket serverSocket = new ServerSocket(port);) {
             client = serverSocket.accept();
             out = new ObjectOutputStream(client.getOutputStream());
@@ -60,7 +56,7 @@ public class Slave extends Thread {
         }
     }
 
-    public void disconnect(){
+    protected void disconnect(){
         try {
             out.close();
             in.close();
@@ -70,13 +66,6 @@ public class Slave extends Thread {
         }
     }
 
-    private void doJob(Job current) throws InterruptedException {
-        if(current.getJobType() == this.specialty){
-            Thread.currentThread().sleep(JOB_TIME / 5);
-        }
-        else{
-            Thread.currentThread().sleep(JOB_TIME);
-        }
-    }
+    protected abstract void doJob(Job current) throws InterruptedException ;
 
 }
