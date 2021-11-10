@@ -1,4 +1,11 @@
+import java.util.Scanner;
+
 public class Slave_A extends Slave {
+
+    public static void main(String[] args) {
+        Slave s = new Slave_A(getPort(args));
+        s.run();
+    }
 
     public Slave_A(int port){
         super(port);
@@ -7,10 +14,11 @@ public class Slave_A extends Slave {
     @Override
     protected void doJob(Job current) throws InterruptedException {
         if(current.getJobType() == JobType.TYPE_A){
-            sleep(2_000);
+            Thread.currentThread().sleep(2_000);
         }
         else{
-            sleep(10_000);
+            Thread.currentThread().sleep(10_000);
         }
     }
+
 }

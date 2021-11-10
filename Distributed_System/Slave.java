@@ -3,7 +3,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
 
-public abstract class Slave extends Thread {
+public abstract class Slave {
     protected final List<Job> waitingJobs = new LinkedList<>();
     protected final int port;
     protected ObjectInputStream in;
@@ -14,7 +14,7 @@ public abstract class Slave extends Thread {
         this.port = port;
     }
 
-    @Override
+
     public void run(){
         try{
             connect();
@@ -64,6 +64,22 @@ public abstract class Slave extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    protected static int getPort(String[] args){
+        int port;
+
+
+        if(args == null || args.length == 0){
+            Scanner sc = new Scanner(System.in);
+            System.out.println("please enter a port number to use for this slave: ");
+            port = Integer.parseInt(sc.nextLine());
+        }
+        else{
+            port = Integer.parseInt(args[0]);
+        }
+
+        return port;
     }
 
     protected abstract void doJob(Job current) throws InterruptedException ;
