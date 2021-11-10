@@ -1,5 +1,11 @@
 public class Slave_B extends Slave {
 
+    public static void main(String[] args) {
+        Slave s = new Slave_B(getPort(args));
+        s.run();
+    }
+
+
     public Slave_B(int port){
         super(port);
     }
@@ -7,10 +13,10 @@ public class Slave_B extends Slave {
     @Override
     protected void doJob(Job current) throws InterruptedException {
         if(current.getJobType() == JobType.TYPE_B){
-            sleep(2_000);
+            Thread.currentThread().sleep(2_000);
         }
         else{
-            sleep(10_000);
+            Thread.currentThread().sleep(10_000);
         }
     }
 }
