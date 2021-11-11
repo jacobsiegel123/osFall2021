@@ -2,17 +2,13 @@ import java.io.IOException;
 import java.net.ServerSocket;
 
 public class JobGenerator {
-    private static final int MAX_CLIENTS = 10; //randomly chosen, could be changed at any time
+    private static final int MAX_THREADS = 10; //randomly chosen, could be changed at any time
 
     public static void main(String[] args) throws IOException {
-        Thread[] threads = new Thread[MAX_CLIENTS];
+        Thread[] threads = new Thread[MAX_THREADS];
         int port = 12345; //randomly chosen, we should decide on a common port to use
         ServerSocket serverSocket = new ServerSocket(port);
         int id = 1;
-        //start off all threads
-        for (Thread thread : threads) {
-            startJob(thread, id++, serverSocket);
-        }
         //Keep checking threads, if a job has completed, give the thread a new job
         for (int i = 0; i <= threads.length; i++) {
             //if the loop reaches the end, start again (this is an infinite loop)
