@@ -16,7 +16,7 @@ public class Job extends Thread {
         return Integer.parseInt(id.substring(id.indexOf("_" + 1)));
     }
     
-    public int getFullId() {
+    public String getFullId() {
         return id;
     }
 
@@ -31,7 +31,7 @@ public class Job extends Thread {
             System.out.print("Setting up the streams " + getId() + "... ::");
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            out.println("" + getFullId() + "|" + getJobType());
+            out.println(getFullId() + "|" + getJobType());
             if ((masterResponse = in.read()/*expects an int*/) == getJobId()) {
                 System.out.println("Received " + masterResponse + " as confirmation that Server finished client number " + getJobId());
             } else {
