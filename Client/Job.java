@@ -2,18 +2,18 @@ import java.io.*;
 import java.net.*;
 
 public class Job extends Thread {
-    private int id;
+    private String id;
     private JobType jobType;
     private ServerSocket serverSocket;
 
-    public Job(int id, JobType jobType, ServerSocket serverSocket) {
+    public Job(String id, JobType jobType, ServerSocket serverSocket) {
         this.id = id;
         this.jobType = jobType;
         this.serverSocket = serverSocket;
     }
 
     public int getJobId() {
-        return id;
+        return Integer.parseInt(id.substring(id.indexOf("_" + 1)));
     }
 
     public JobType getJobType() {
