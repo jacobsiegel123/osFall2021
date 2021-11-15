@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Client {
     private static final int MAX_THREADS = 10; //randomly chosen, could be changed at any time
-    private static String clientID = setClientID();
+    private static final String clientID = setClientID();
 
     public static void main(String[] args) throws IOException {
         Thread[] threads = new Thread[MAX_THREADS];
