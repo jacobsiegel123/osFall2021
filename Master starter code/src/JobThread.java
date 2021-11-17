@@ -1,3 +1,5 @@
+package src;
+
 import java.io.*;
 import java.net.*;
 
@@ -20,6 +22,7 @@ public class JobThread extends Thread {
         return jobType;
     }
 
+    @Override
     public void run() {
         int masterResponse;
         try {

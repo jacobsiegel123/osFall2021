@@ -1,3 +1,5 @@
+package src;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -12,9 +14,9 @@ public class Master {
     private final ServerSocket server;
     protected final List<ThreadData> clients = Collections.synchronizedList(new ArrayList<ThreadData>());
     protected final List<SlaveData> slaves = Collections.synchronizedList(new ArrayList<SlaveData>());
-    private int port = 2000;//where the next thread will run
+    private int port = 2000; //where the next thread will run
 
-    //these feilds are used to give new threads ID numbers
+    //these fields are used to give new threads ID numbers
     private int slaveID = 1;
     private int clientID = 1;
 
@@ -27,6 +29,15 @@ public class Master {
             System.out.println("Something went wrong on the server end.");
             e.printStackTrace();
         }
+    }
+
+    //TODO make a method that gives a slave a job
+    public void assignJob(Slave slave){
+
+    }
+
+    public void getJobFromClient(Client client){
+        JobType j = client.sendJob();
     }
 
 
@@ -72,7 +83,7 @@ public class Master {
     /**
      * This method takes a job and decides which slave it will be assigned to.
      * It then gets the port number that slave is running on and returns it.
-     * the CommunicaterThread will use that number to connect to the slave
+     * the CommunicatorThread will use that number to connect to the slave
      * and send it the job.
      * @param j the job that needs to be assigned
      * @return the port number that the slave can be found on
@@ -96,9 +107,9 @@ public class Master {
 
             //TODO set up jobCompletionThread here
 
+            //TODO probably call load bal, then give slave the job
 
-
-        }catch(IOException e){
+        } catch(IOException e) {
             e.printStackTrace();
         }
     }

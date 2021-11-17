@@ -1,3 +1,5 @@
+package src;
+
 import java.util.Scanner;
 
 public class Slave_A extends Slave {

@@ -1,3 +1,5 @@
+package src;
+
 public class Slave_B extends Slave {
 
     public static void main(String[] args) {
