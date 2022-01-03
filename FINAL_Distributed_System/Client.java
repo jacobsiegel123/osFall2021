@@ -20,7 +20,7 @@ public class Client {
     }
 
     private static int getRandom4DigitNum() {
-        return r.nextInt(8998) + 1001;
+        return r.nextInt(9000) + 1000;
     }
 
     private static boolean isPortAvailable(int testPort) {
