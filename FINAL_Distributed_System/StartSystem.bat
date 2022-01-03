@@ -1,4 +1,4 @@
-rem Enter the file path to your folder on the next line, and then delete this line
+rem Enter the file path to YOUR project folder on the next line
 cd "C:\Users\DEN - NEW\IdeaProjects\osFall2021\Distributed_System"
 javac *.java
 start cmd /k java Slave_A
